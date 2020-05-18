@@ -7,7 +7,6 @@ class Country extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		//totoooooo
 		$this->load->model('Country_model');
 	}
 
@@ -27,15 +26,14 @@ class Country extends CI_Controller {
 		}
 
 		$data['country'] = $this->Country_model->ShowCountries();
-		//???????
 		$data['nazov'] = 'Zoznam študentov';
-		//nahratie zoznamu studentov
+		//nahratie zoznamu krajin
 		$this->load->view('templates/header', $data);
 		$this->load->view('country/index', $data);
 		$this->load->view('templates/footer');
 	}
 
-	// pridanie zaznamu o studentovi
+	// pridanie zaznamu o krajine
 	public function add(){
 		$data = array();
 		$postData = array();
@@ -59,7 +57,7 @@ class Country extends CI_Controller {
 					$this->session->set_userdata('success_msg', 'Country record successfully inserted');
 					redirect('/country');
 				}else{
-					$data['error_msg'] = 'Oooopsie.';
+					$data['error_msg'] = 'Error.';
 				}
 			}
 		}
@@ -73,7 +71,7 @@ class Country extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	// aktualizacia dat o studentovi
+	// aktualizacia dat o krajine
 	public function edit($id){
 		$data = array();
 		//ziskanie dat z tabulky
@@ -103,8 +101,6 @@ class Country extends CI_Controller {
 			}
 		}
 
-		//$data['users'] = $this->Temperatures_model->get_users_dropdown();
-		//	$data['users_selected'] = $postData['user'];
 		$data['post'] = $postData;
 		$data['title'] = 'Update data';
 		$data['action'] = 'edit';
@@ -116,7 +112,7 @@ class Country extends CI_Controller {
 	}
 
 
-	// Zobrazenie detailu o studentovi
+	// Zobrazenie detailu o krajine
 	public function view($id){
 		$data = array();
 
@@ -136,7 +132,7 @@ class Country extends CI_Controller {
 		}
 	}
 
-	// odstranenie dat o studentovi
+	// odstranenie dat o krajine
 	public function delete($id){
 		//overenie, ci id nie je prazdne
 		if($id){

@@ -35,7 +35,7 @@
 							</td>
 						</tr>
 					<?php endforeach; else: ?>
-						<tr><td colspan="4">No countries, add some ☺</td></tr>
+						<tr><td colspan="4">No countries, add some</td></tr>
 					<?php endif; ?>
 					</tbody>
 				</table>

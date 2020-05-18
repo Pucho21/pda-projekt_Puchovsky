@@ -131,7 +131,7 @@ class Representative extends CI_Controller
 		}
 
 		$data['country'] = $this->Representative_model->NaplnDropdownStudenti();
-		$data['vybrany_reprezentant'] = $postData['idcountry'];
+		$data['vybrana_krajina'] = $postData['idcountry'];
 		$data['post'] = $postData;
 		$data['title'] = 'Aktualizovať údaje';
 		$data['action'] = 'edit';

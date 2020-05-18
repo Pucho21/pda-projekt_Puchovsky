@@ -81,7 +81,7 @@ class WorldChamps extends CI_Controller
 			}
 		}
 		$data['post'] = $postData;
-		$data['Country'] = $this->WorldChamps_model->NaplnDropdownStudenti();
+		$data['country'] = $this->WorldChamps_model->NaplnDropdownStudenti();
 		$data['vybrana_krajina'] = '';
 		$data['title'] = 'Add Championship';
 		$data['action'] = 'add';
@@ -126,7 +126,7 @@ class WorldChamps extends CI_Controller
 			}
 		}
 
-		$data['Country'] = $this->Representative_model->NaplnDropdownStudenti();
+		$data['country'] = $this->Representative_model->NaplnDropdownStudenti();
 		$data['vybrana_krajina'] = $postData['idcountry'];
 		$data['post'] = $postData;
 		$data['title'] = 'Aktualizovať údaje';

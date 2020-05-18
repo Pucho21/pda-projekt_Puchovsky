@@ -20,12 +20,12 @@ class WorldChamps_model extends CI_Model {
 
 	function ZobrazZnamkySpravne($id=""){
 		if(!empty($id)){
-			$this->db->select('idWorldChamps, Name, Country')
+			$this->db->select('idWorldChamps, Name, Country_idCountry')
 				->from('world_champs');
 			$query = $this->db->get();
 			return $query->row_array();
 		}else{
-			$this->db->select('idWorldChamps, Name, Country')
+			$this->db->select('idWorldChamps, Name, Country_idCountry')
 				->from('world_champs');
 			$query = $this->db->get();
 			return $query->result_array();

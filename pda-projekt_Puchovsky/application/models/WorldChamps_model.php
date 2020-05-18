@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Representative_model extends CI_Model {
+class WorldChamps_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
@@ -9,10 +9,10 @@ class Representative_model extends CI_Model {
 	function ZobrazZnamky($id="") {
 		if(!empty($id)){
 			//Error moze byt tu v zelenom id
-			$query = $this->db->get_where('representative', array('idRepresentative' => $id));
+			$query = $this->db->get_where('world_champs', array('idWorldChamps' => $id));
 			return $query->row_array();
 		}else{
-			$query = $this->db->get('representative');
+			$query = $this->db->get('world_champs');
 			return $query->result_array();
 		}
 
@@ -20,16 +20,13 @@ class Representative_model extends CI_Model {
 
 	function ZobrazZnamkySpravne($id=""){
 		if(!empty($id)){
-			$this->db->select('representative.idRepresentative, CONCAT(representative.Name," ", representative.Surname) AS cele_meno, idcountry, country')
-				->from('country')
-				->join('representative', 'country.idcoutry = representative.idRepresentative')
-				->where('representative.idRepresentative',$id);
+			$this->db->select('idWorldChamps, Name, Country')
+				->from('world_champs');
 			$query = $this->db->get();
 			return $query->row_array();
 		}else{
-			$this->db->select('representative.idRepresentative, CONCAT(representative.Name," ", representative.Surname) AS cele_meno, idcountry, country')
-				->from('country')
-				->join('representative', 'country.idcountry = representative.idRepresentative');
+			$this->db->select('idWorldChamps, Name, Country')
+				->from('world_champs');
 			$query = $this->db->get();
 			return $query->result_array();
 		}
@@ -56,7 +53,7 @@ class Representative_model extends CI_Model {
 
 	// vlozenie zaznamu
 	public function insert($data = array()) {
-		$insert = $this->db->insert('representative', $data);
+		$insert = $this->db->insert('world_champs', $data);
 		if($insert){
 			return $this->db->insert_id();
 		}else{
@@ -68,7 +65,7 @@ class Representative_model extends CI_Model {
 	public function update($data, $id) {
 		if(!empty($data) && !empty($id)){
 			//Tu moze byt Error v idRepresentative
-			$update = $this->db->update('representative', $data, array('idRepresentative'=>$id));
+			$update = $this->db->update('world_champs', $data, array('idWorldChamps'=>$id));
 			return $update?true:false;
 		}else{
 			return false;
@@ -78,7 +75,7 @@ class Representative_model extends CI_Model {
 	// odstranenie zaznamu
 	public function delete($id){
 		//Tu moze byt Error v idRepresentative
-		$delete = $this->db->delete('representative',array('idRepresentative'=>$id));
+		$delete = $this->db->delete('world_champs',array('idWorldChamps'=>$id));
 		return $delete?true:false;
 	}
 

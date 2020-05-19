@@ -102,15 +102,13 @@ class WorldChamps extends CI_Controller
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
-			//$this->form_validation->set_rules('idWorldChamps', 'Pole student', 'required');
 			$this->form_validation->set_rules('Name', 'Pole znamka', 'required');
 			$this->form_validation->set_rules('country_idcountry', 'Pole datum', 'required');
 
 			// priprava dat pre aktualizaciu
 			$postData = array(
 				'Name' => $this->input->post('Name'),
-				'country_idcountry' => $this->input->post('country_idcountry'),
-				'idWorldChamps' => $this->input->post('idWorldChamps'),
+				'country_idcountry' => $this->input->post('country_idcountry')
 			);
 
 			//validacia zaslanych dat

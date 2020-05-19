@@ -18,7 +18,7 @@
 
 						<div class="form-group">
 							<label for="title">Event Name</label>
-							<input type="text" class="form-control" name="Name" id="Name" placeholder="Add event name" value="<?php echo !empty($post['world_champs'])?$post['world_champs']:''; ?>">
+							<input type="text" class="form-control" name="Name" id="Name" placeholder="Add event name" value="<?php echo !empty($post['Name'])?$post['Name']:''; ?>">
 							<?php echo form_error('Name','<p class="help-block text-danger">','</p>'); ?>
 						</div>
 

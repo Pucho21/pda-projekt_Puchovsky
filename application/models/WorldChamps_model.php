@@ -11,7 +11,7 @@ class WorldChamps_model extends CI_Model {
 			$this->db->select('idWorldChamps, Name, country_idcountry')
 				->from('world_champs')
 				->join('country', 'world_champs.country_idcountry = country.idcountry')
-				->where('country.idcountry',$id);
+				->where('world_champs.idWorldChamps',$id);
 			$query = $this->db->get();
 			return $query->row_array();
 		}else{

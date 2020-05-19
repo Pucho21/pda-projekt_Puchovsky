@@ -6,19 +6,23 @@
 			<div class="panel-body">
 				<div class="form-group">
 					<label>ID:</label>
-					<p><?php echo !empty($znamky['idRepresentative'])? $znamky['idRepresentative']:''; ?></p>
+					<p><?php echo !empty($representative['idRepresentative'])? $representative['idRepresentative']:''; ?></p>
 				</div>
 				<div class="form-group">
-					<label>Full Name:</label>
-					<p><?php echo !empty($repre['cele_meno'])? $repre['cele_meno']:''; ?></p>
+					<label>Name:</label>
+					<p><?php echo !empty($representative['Name'])? $representative['Name']:''; ?></p>
+				</div>
+				<div class="form-group">
+					<label>Surname:</label>
+					<p><?php echo !empty($representative['Surname'])? $representative['Surname']:''; ?></p>
 				</div>
 				<div class="form-group">
 					<label>ID_Country:</label>
-					<p><?php echo !empty($znamky['idcountry'])? $znamky['idcountry']:''; ?></p>
+					<p><?php echo !empty($representative['country_idcountry'])? $representative['country_idcountry']:''; ?></p>
 				</div>
 				<div class="form-group">
 					<label>Country:</label>
-					<p><?php echo !empty($znamky['country'])? $znamky['country']:''; ?></p>
+					<p><?php echo !empty($representative['country'])? $representative['country']:''; ?></p>
 				</div>
 			</div>
 		</div>

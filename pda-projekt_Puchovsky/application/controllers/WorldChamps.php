@@ -11,6 +11,7 @@ class WorldChamps extends CI_Controller
 	}
 	public function index(){
 		$data = array();
+		$data['title'] = 'WorldChamps';
 
 		//ziskanie sprav zo session
 		if($this->session->userdata('success_msg')){
@@ -22,7 +23,7 @@ class WorldChamps extends CI_Controller
 			$this->session->unset_userdata('error_msg');
 		}
 
-		$data['champs'] = $this->WorldChamps_model->ZobrazZnamkySpravne();
+		$data['world_champs'] = $this->WorldChamps_model->ZobrazZnamkySpravne();
 		$data['nazov'] = 'Zoznam známok';
 		//nahratie zoznamu studentov
 		$this->load->view('templates/header', $data);
@@ -36,8 +37,8 @@ class WorldChamps extends CI_Controller
 
 		//kontrola, ci bolo zaslane id riadka
 		if(!empty($id)){
-			$data['champs'] = $this->WorldChamps_model->ZobrazZnamkySpravne($id);
-			$data['title'] = 'Detail známky';
+			$data['world_champs'] = $this->WorldChamps_model->ZobrazZnamkySpravne($id);
+			$data['title'] = 'Championship detail';
 
 			//nahratie detailu zaznamu
 			$this->load->view('templates/header', $data);
@@ -56,15 +57,15 @@ class WorldChamps extends CI_Controller
 		//zistenie, ci bola zaslana poziadavka na pridanie zaznamu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
-			$this->form_validation->set_rules('idWorldChamps', 'Pole student', 'required');
+			//$this->form_validation->set_rules('idWorldChamps', 'Pole student', 'required');
 			$this->form_validation->set_rules('Name', 'Pole znamka', 'required');
-			$this->form_validation->set_rules('Country', 'Pole datum', 'required');
+			$this->form_validation->set_rules('country_idcountry', 'Pole datum', 'required');
 
 			//priprava dat pre vlozenie
 			$postData = array(
 				'Name' => $this->input->post('Name'),
-				'Country' => $this->input->post('Country'),
-				'idWorldChamps' => $this->input->post('idWorldChamps'),
+				'country_idcountry' => $this->input->post('country_idcountry'),
+				//'idWorldChamps' => $this->input->post('idWorldChamps'),
 			);
 
 			//validacia zaslanych dat
@@ -73,18 +74,19 @@ class WorldChamps extends CI_Controller
 				$insert = $this->WorldChamps_model->insert($postData);
 
 				if($insert){
-					$this->session->set_userdata('success_msg', 'Záznam o reprezentantovi bol úspešne vložený');
+					$this->session->set_userdata('success_msg', 'Záznam o championship bol úspešne vložený');
 					redirect('/worldchamps');
 				}else{
 					$data['error_msg'] = 'Nastal problém pri vkladani.';
 				}
 			}
 		}
+		$data['action'] = 'Add';
 		$data['post'] = $postData;
 		$data['country'] = $this->WorldChamps_model->NaplnDropdownStudenti();
 		$data['vybrana_krajina'] = '';
 		$data['title'] = 'Add Championship';
-		$data['action'] = 'add';
+
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);
@@ -101,15 +103,13 @@ class WorldChamps extends CI_Controller
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
-			$this->form_validation->set_rules('idWorldChamps', 'Pole student', 'required');
 			$this->form_validation->set_rules('Name', 'Pole znamka', 'required');
-			$this->form_validation->set_rules('Country', 'Pole datum', 'required');
+			$this->form_validation->set_rules('country_idcountry', 'Pole datum', 'required');
 
 			// priprava dat pre aktualizaciu
 			$postData = array(
 				'Name' => $this->input->post('Name'),
-				'Country' => $this->input->post('Country'),
-				'idWorldChamps' => $this->input->post('idWorldChamps'),
+				'country_idcountry' => $this->input->post('country_idcountry')
 			);
 
 			//validacia zaslanych dat
@@ -125,12 +125,12 @@ class WorldChamps extends CI_Controller
 				}
 			}
 		}
-
-		$data['country'] = $this->Representative_model->NaplnDropdownStudenti();
-		$data['vybrana_krajina'] = $postData['idcountry'];
+		$data['action'] = 'Edit';
+		$data['country'] = $this->WorldChamps_model->NaplnDropdownStudenti();
+		$data['vybrana_krajina'] = $postData['country_idcountry'];
 		$data['post'] = $postData;
 		$data['title'] = 'Aktualizovať údaje';
-		$data['action'] = 'edit';
+
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);

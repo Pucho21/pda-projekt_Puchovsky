@@ -6,30 +6,18 @@ class Representative_model extends CI_Model {
 		$this->load->database();
 	}
 
-	function ZobrazZnamky($id="") {
-		if(!empty($id)){
-			//Error moze byt tu v zelenom id
-			$query = $this->db->get_where('representative', array('idRepresentative' => $id));
-			return $query->row_array();
-		}else{
-			$query = $this->db->get('representative');
-			return $query->result_array();
-		}
-
-	}
-
 	function ZobrazZnamkySpravne($id=""){
 		if(!empty($id)){
-			$this->db->select('representative.idRepresentative, CONCAT(representative.Name," ", representative.Surname) AS cele_meno, idcountry, country')
-				->from('country')
-				->join('representative', 'country.idcoutry = representative.idRepresentative')
+			$this->db->select('idRepresentative, Name, Surname, country_idcountry')
+				->from('representative')
+				->join('country', 'country.idcountry = representative.country_idcountry')
 				->where('representative.idRepresentative',$id);
 			$query = $this->db->get();
 			return $query->row_array();
 		}else{
-			$this->db->select('representative.idRepresentative, CONCAT(representative.Name," ", representative.Surname) AS cele_meno, idcountry, country')
-				->from('country')
-				->join('representative', 'country.idcountry = representative.idRepresentative');
+			$this->db->select('idRepresentative, Name, Surname, country_idcountry')
+				->from('representative')
+				->join('country', 'country.idcountry = representative.country_idcountry');
 			$query = $this->db->get();
 			return $query->result_array();
 		}
@@ -39,15 +27,14 @@ class Representative_model extends CI_Model {
 	//  naplnenie selectu z tabulky country
 	public function NaplnDropdownStudenti($id = ""){
 		$this->db->order_by('country')
-			->select('idcountry, country AS cele_meno')
+			->select('idcountry, country')
 			->from('country');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			$dropdowns = $query->result();
 			foreach ($dropdowns as $dropdown)
 			{
-				//tuto som menil idRepresentative na idcoutry a to iste aj v add-edit na riadkoch 21 22
-				$dropdownlist[$dropdown->idcountry] = $dropdown->cele_meno;
+				$dropdownlist[$dropdown->idcountry] = $dropdown->country;
 			}
 			$dropdownlist[''] = 'Pick country';
 			return $dropdownlist;
@@ -67,7 +54,6 @@ class Representative_model extends CI_Model {
 	// aktualizacia zaznamu
 	public function update($data, $id) {
 		if(!empty($data) && !empty($id)){
-			//Tu moze byt Error v idRepresentative
 			$update = $this->db->update('representative', $data, array('idRepresentative'=>$id));
 			return $update?true:false;
 		}else{

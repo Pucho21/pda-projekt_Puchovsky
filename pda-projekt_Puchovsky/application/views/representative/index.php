@@ -9,7 +9,7 @@
 		</div>
 	<?php } ?>
 	<div class="row">
-		<h1>Zoznam reprezentantov</h1>
+		<h1>List of representatives</h1>
 	</div>
 
 	<div class="row">
@@ -20,23 +20,23 @@
 					<thead>
 					<tr>
 						<th width="10%">ID_Repre</th>
-						<th width="25%">Full Name</th>
+						<th width="25%">Name</th>
+						<th width="25%">Surname</th>
 						<th width="25%">ID_Country</th>
-						<th width="10%">Country</th>
 						<th width="10%">Akcie</th>
 					</tr>
 					</thead>
 					<tbody id="userData">
-					<?php if(!empty($repre)): foreach($repre as $znamka): ?>
+					<?php if(!empty($representative)): foreach($representative as $representative): ?>
 						<tr>
-							<td><?php echo '#'.$znamka['idRepresentative']; ?></td>
-							<td><?php echo $znamka['cele_meno']; ?></td>
-							<td><?php echo $znamka['idcountry']; ?></td>
-							<td><?php echo $znamka['country']; ?></td>
+							<td><?php echo '#'.$representative['idRepresentative']; ?></td>
+							<td><?php echo $representative['Name']; ?></td>
+							<td><?php echo $representative['Surname']; ?></td>
+							<td><?php echo $representative['country_idcountry']; ?></td>
 							<td>
-								<a href="<?php echo site_url('representative/view/'.$znamka['idRepresentative']); ?>"class="glyphicon glyphicon-eye-open"></a>
-								<a href="<?php echo site_url('representative/edit/'.$znamka['idRepresentative']); ?>"class="glyphicon glyphicon-edit"></a>
-								<a href="<?php echo site_url('representative/delete/'.$znamka['idRepresentative']); ?>"class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
+								<a href="<?php echo site_url('representative/view/'.$representative['idRepresentative']); ?>"class="glyphicon glyphicon-eye-open"></a>
+								<a href="<?php echo site_url('representative/edit/'.$representative['idRepresentative']); ?>"class="glyphicon glyphicon-edit"></a>
+								<a href="<?php echo site_url('representative/delete/'.$representative['idRepresentative']); ?>"class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
 							</td>
 						</tr>
 					<?php endforeach; else: ?>

@@ -103,7 +103,7 @@ class Country extends CI_Controller {
 
 		$data['post'] = $postData;
 		$data['title'] = 'Update data';
-		$data['action'] = 'edit';
+		$data['action'] = 'Edit';
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);
@@ -120,8 +120,6 @@ class Country extends CI_Controller {
 		if(!empty($id)){
 			$data['country'] = $this->Country_model->ShowCountries($id);
 			$data['title'] = $data['country']['country'];
-			//priklad zretazenia
-			//$data['title'] = $data['studenti']['priezvisko'] . ' ' . $data['studenti']['meno'];
 
 			//nahratie detailu zaznamu
 			$this->load->view('templates/header', $data);

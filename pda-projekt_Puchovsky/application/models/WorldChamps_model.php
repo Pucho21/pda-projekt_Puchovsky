@@ -6,37 +6,27 @@ class WorldChamps_model extends CI_Model {
 		$this->load->database();
 	}
 
-	function ZobrazZnamky($id="") {
-		if(!empty($id)){
-			//Error moze byt tu v zelenom id
-			$query = $this->db->get_where('world_champs', array('idWorldChamps' => $id));
-			return $query->row_array();
-		}else{
-			$query = $this->db->get('world_champs');
-			return $query->result_array();
-		}
-
-	}
-
 	function ZobrazZnamkySpravne($id=""){
 		if(!empty($id)){
-			$this->db->select('idWorldChamps, Name, Country_idCountry')
-				->from('world_champs');
+			$this->db->select('idWorldChamps, Name, country_idcountry')
+				->from('world_champs')
+				->join('country', 'world_champs.country_idcountry = country.idcountry')
+				->where('world_champs.idWorldChamps',$id);
 			$query = $this->db->get();
 			return $query->row_array();
 		}else{
-			$this->db->select('idWorldChamps, Name, Country_idCountry')
-				->from('world_champs');
+			$this->db->select('idWorldChamps, Name, country_idcountry')
+				->from('world_champs')
+				->join('country', 'world_champs.country_idcountry = country.idcountry');
 			$query = $this->db->get();
 			return $query->result_array();
 		}
-
 	}
 
 	//  naplnenie selectu z tabulky country
 	public function NaplnDropdownStudenti($id = ""){
 		$this->db->order_by('country')
-			->select('idcountry, country AS cele_meno')
+			->select('idcountry, country')
 			->from('country');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
@@ -44,7 +34,7 @@ class WorldChamps_model extends CI_Model {
 			foreach ($dropdowns as $dropdown)
 			{
 				//tuto som menil idRepresentative na idcoutry a to iste aj v add-edit na riadkoch 21 22
-				$dropdownlist[$dropdown->idcountry] = $dropdown->cele_meno;
+				$dropdownlist[$dropdown->idcountry] = $dropdown->country;
 			}
 			$dropdownlist[''] = 'Pick country';
 			return $dropdownlist;

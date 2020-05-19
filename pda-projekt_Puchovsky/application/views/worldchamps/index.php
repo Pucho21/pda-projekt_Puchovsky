@@ -22,22 +22,19 @@
 						<th width="10%">ID_WorldChamps</th>
 						<th width="25%">Name</th>
 						<th width="25%">ID_Country</th>
-						<th width="10%">Country</th>
 						<th width="10%">Akcie</th>
 					</tr>
 					</thead>
 					<tbody id="userData">
-					<?php if(!empty($repre)): foreach($repre as $znamka): ?>
+					<?php if(!empty($world_champs)): foreach($world_champs as $world_champs): ?>
 						<tr>
-							<td><?php echo '#'.$znamka['idWorldChamps']; ?></td>
-							<td><?php echo $znamka['name']; ?></td>
-							<td><?php echo $znamka['idcountry']; ?></td>
-
-							<td><?php echo $znamka['country']; ?></td>
+							<td><?php echo '#'.$world_champs['idWorldChamps']; ?></td>
+							<td><?php echo $world_champs['Name']; ?></td>
+							<td><?php echo $world_champs['country_idcountry']; ?></td>
 							<td>
-								<a href="<?php echo site_url('worldchamps/view/'.$znamka['idWorldChamps']); ?>"class="glyphicon glyphicon-eye-open"></a>
-								<a href="<?php echo site_url('worldchamps/edit/'.$znamka['idWorldChamps']); ?>"class="glyphicon glyphicon-edit"></a>
-								<a href="<?php echo site_url('worldchamps/delete/'.$znamka['idWorldChamps']); ?>"class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
+								<a href="<?php echo site_url('WorldChamps/view/'.$world_champs['idWorldChamps']); ?>"class="glyphicon glyphicon-eye-open"></a>
+								<a href="<?php echo site_url('WorldChamps/edit/'.$world_champs['idWorldChamps']); ?>"class="glyphicon glyphicon-edit"></a>
+								<a href="<?php echo site_url('WorldChamps/delete/'.$world_champs['idWorldChamps']); ?>"class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
 							</td>
 						</tr>
 					<?php endforeach; else: ?>

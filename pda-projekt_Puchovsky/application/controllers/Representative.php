@@ -11,6 +11,7 @@ class Representative extends CI_Controller
 	}
 	public function index(){
 		$data = array();
+		$data['title'] = 'Representative';
 
 		//ziskanie sprav zo session
 		if($this->session->userdata('success_msg')){
@@ -22,7 +23,7 @@ class Representative extends CI_Controller
 			$this->session->unset_userdata('error_msg');
 		}
 
-		$data['repre'] = $this->Representative_model->ZobrazZnamkySpravne();
+		$data['representative'] = $this->Representative_model->ZobrazZnamkySpravne();
 		$data['nazov'] = 'Zoznam známok';
 		//nahratie zoznamu studentov
 		$this->load->view('templates/header', $data);
@@ -36,7 +37,7 @@ class Representative extends CI_Controller
 
 		//kontrola, ci bolo zaslane id riadka
 		if(!empty($id)){
-			$data['repre'] = $this->Representative_model->ZobrazZnamkySpravne($id);
+			$data['representative'] = $this->Representative_model->ZobrazZnamkySpravne($id);
 			$data['title'] = 'Detail známky';
 
 			//nahratie detailu zaznamu
@@ -58,15 +59,13 @@ class Representative extends CI_Controller
 			//definicia pravidiel validacie
 			$this->form_validation->set_rules('Name', 'Pole znamka', 'required');
 			$this->form_validation->set_rules('Surname', 'Pole datum', 'required');
-			//$this->form_validation->set_rules('predmet', 'Pole predmet', 'required');
-			$this->form_validation->set_rules('idcountry', 'Pole student', 'required');
+			$this->form_validation->set_rules('country_idcountry', 'Pole student', 'required');
 
 			//priprava dat pre vlozenie
 			$postData = array(
 				'Name' => $this->input->post('Name'),
 				'Surname' => $this->input->post('Surname'),
-				//'predmet' => $this->input->post('predmet'),
-				'idcountry' => $this->input->post('idcountry'),
+				'country_idcountry' => $this->input->post('country_idcountry'),
 			);
 
 			//validacia zaslanych dat
@@ -85,8 +84,8 @@ class Representative extends CI_Controller
 		$data['post'] = $postData;
 		$data['country'] = $this->Representative_model->NaplnDropdownStudenti();
 		$data['vybrana_krajina'] = '';
-		$data['title'] = 'Pridať borca';
-		$data['action'] = 'add';
+		$data['title'] = 'Add representative';
+		$data['action'] = 'Add';
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);
@@ -106,14 +105,14 @@ class Representative extends CI_Controller
 			$this->form_validation->set_rules('Name', 'Pole znamka', 'required');
 			$this->form_validation->set_rules('Surname', 'Pole datum', 'required');
 			//$this->form_validation->set_rules('predmet', 'Pole predmet', 'required');
-			$this->form_validation->set_rules('idcountry', 'Pole student', 'required');
+			$this->form_validation->set_rules('country_idcountry', 'Pole student', 'required');
 
 			// priprava dat pre aktualizaciu
 			$postData = array(
 				'Name' => $this->input->post('Name'),
 				'Surname' => $this->input->post('Surname'),
 				//'predmet' => $this->input->post('predmet'),
-				'idcountry' => $this->input->post('idcountry'),
+				'country_idcountry' => $this->input->post('country_idcountry'),
 			);
 
 			//validacia zaslanych dat
@@ -131,7 +130,7 @@ class Representative extends CI_Controller
 		}
 
 		$data['country'] = $this->Representative_model->NaplnDropdownStudenti();
-		$data['vybrana_krajina'] = $postData['idcountry'];
+		$data['vybrana_krajina'] = $postData['country_idcountry'];
 		$data['post'] = $postData;
 		$data['title'] = 'Aktualizovať údaje';
 		$data['action'] = 'edit';

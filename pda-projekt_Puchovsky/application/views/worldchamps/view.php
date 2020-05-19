@@ -6,19 +6,15 @@
 			<div class="panel-body">
 				<div class="form-group">
 					<label>ID_worldchamps:</label>
-					<p><?php echo !empty($znamky['idWorldChamps'])? $znamky['idWorldChamps']:''; ?></p>
+					<p><?php echo !empty($world_champs['idWorldChamps'])? $world_champs['idWorldChamps']:''; ?></p>
 				</div>
 				<div class="form-group">
 					<label>Name:</label>
-					<p><?php echo !empty($repre['name'])? $repre['name']:''; ?></p>
+					<p><?php echo !empty($world_champs['Name'])? $world_champs['Name']:''; ?></p>
 				</div>
 				<div class="form-group">
 					<label>ID_Country:</label>
-					<p><?php echo !empty($znamky['idcountry'])? $znamky['idcountry']:''; ?></p>
-				</div>
-				<div class="form-group">
-					<label>Country:</label>
-					<p><?php echo !empty($znamky['country'])? $znamky['country']:''; ?></p>
+					<p><?php echo !empty($world_champs['country_idcountry'])? $world_champs['country_idcountry']:''; ?></p>
 				</div>
 			</div>
 		</div>
